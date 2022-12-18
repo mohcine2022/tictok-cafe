@@ -1,0 +1,94 @@
+.top-container {
+
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  .toolbar {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .container {
+    flex-grow: 1;
+    margin: 8px;
+    display: flex;
+    flex-direction: row;
+
+    .side-nav {
+      width: 20%;
+      min-width: 300px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+
+    .fx-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+
+      .card-content {
+        flex-grow: 1;
+
+        .card-title {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 32px;
+        }
+
+        .list-item {
+          padding: 8px;
+          margin: 4px;
+          background-color: rgb(231 244 255);
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          font-weight: bold;
+          align-items: flex-start;
+
+          .commande-item {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+
+          }
+
+          &.selected {
+            background-color: #ffa579;
+          }
+
+          &:hover {
+            cursor: pointer;
+            background-color: rgb(186, 212, 204);
+          }
+        }
+      }
+
+      .card-action {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+}

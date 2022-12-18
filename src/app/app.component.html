@@ -1,0 +1,134 @@
+<div class="top-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <h5>Cafe TicTok - Marrakech</h5>
+  </mat-toolbar>
+  <div class="container">
+
+    <div class="main">
+
+      <mat-card class="fx-card consommation">
+        <div class="card-content">
+          <div class="card-title">Liste des consommations</div>
+          <div class="list-item" *ngFor="let item of consommations" (click)="selectConsommation(item)"
+            [class.selected]="isSelected(item)">
+            <div>{{item.libelle}}</div>
+            <div>{{item.prixUnitaire}} DH</div>
+          </div>
+        </div>
+
+        <div class="card-action">
+          <button mat-fab (click)="ajouterConsommation()"><mat-icon>add</mat-icon></button>
+        </div>
+      </mat-card>
+
+      <mat-card class="fx-card serveur">
+        <div class="card-content">
+          <div class="card-title">Serveurs</div>
+          <div class="list-item" *ngFor="let item of serveurs">
+            {{item.nom}}
+          </div>
+        </div>
+
+        <div class="card-action">
+          <button mat-fab (click)="ajouterServeur()"><mat-icon>add</mat-icon></button>
+        </div>
+      </mat-card>
+
+      <mat-card class="fx-card table">
+        <div class="card-content">
+          <div class="card-title">Tables</div>
+          <div class="list-item" *ngFor="let item of tables" (click)="selectTable(item)"
+            [class.selected]="isSelectedTable(item)">
+            Table N° {{item.numeroTable}}
+          </div>
+        </div>
+
+        <div class="card-action">
+          <button mat-fab (click)="ajouterTable()"><mat-icon>add</mat-icon></button>
+        </div>
+      </mat-card>
+
+      <mat-card class="fx-card commande">
+        <div class="card-content">
+          <div class="card-title">Commandes</div>
+          <div class="list-item" *ngFor="let item of commandes">
+
+            <div class="commande-item">
+              <div style="font-size: 16px; font-weight: bold;">Table N° {{item.table?.numeroTable}}</div>
+              <div>{{item.date | date:'dd/MM/yyyy'}} {{item.heure}}</div>
+              <div>Serveur: 🙎‍♂️ {{item.table?.serveur?.nom }}</div>
+              <div>Consommations:</div>
+              <ul>
+                <li *ngFor="let line of item.lignes" style="display: flex; justify-content: space-between;">
+                  <span>{{line.consommation?.libelle}}</span>
+                  <span>{{line.quantite}} x {{line.consommation?.prixUnitaire}} DH</span>
+                </li>
+              </ul>
+
+              <div style="text-align: center;">Montant total: <span style="font-weight: bold;font-size: 16px;">{{item.montantTotal}} DH</span></div>
+            </div>
+
+            <button mat-icon-button color="primary" (click)="imprimerCommande(item)"><mat-icon>printer</mat-icon></button>
+          </div>
+        </div>
+
+
+      </mat-card>
+    </div>
+    <mat-card class="side-nav" *ngIf="newCommand">
+
+      <form [formGroup]="form">
+
+
+        <mat-form-field formGroupName="table" style="width: 100%;">
+          <mat-label>Table</mat-label>
+          <mat-select formControlName="id">
+            <mat-option *ngFor="let table of tables" [value]="table.id">Table N° {{table.numeroTable}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width:180px">
+          <mat-label>Date</mat-label>
+          <input [placeholder]="'Date'" matInput [matDatepicker]="examDatePicker" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="examDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #examDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field style="width:100px">
+          <mat-label>Heure</mat-label>
+          <input type="time" matInput [placeholder]="'Heure'" formControlName="heure">
+        </mat-form-field>
+
+
+        <div formArrayName="lignes" *ngFor="let _ of form?.get('lignes')['controls']; let i = index">
+          <ng-container [formGroupName]="i">
+
+
+
+            <mat-form-field style="width: auto;" formGroupName="consommation">
+              <mat-label>Consommation</mat-label>
+              <mat-select formControlName="id">
+                <mat-option *ngFor="let consommation of consommations"
+                  [value]="consommation.id">{{consommation.libelle}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <mat-form-field style="width:100px">
+              <mat-label>Quantité</mat-label>
+              <input [placeholder]="'Quantité'" formControlName="quantite" type="number" matInput>
+            </mat-form-field>
+
+
+          </ng-container>
+        </div>
+
+      </form>
+
+      <div style="display: flex;gap: 8px;">
+        <button mat-raised-button (click)="creerCommande(form.value)">Enregistrer commande</button>
+      </div>
+
+    </mat-card>
+  </div>
+</div>

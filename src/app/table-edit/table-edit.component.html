@@ -1,0 +1,29 @@
+<div matDialogTitle>
+  Ajout d'une table
+</div>
+<div>
+
+  <form [formGroup]="form">
+
+    <mat-form-field>
+      <mat-label>Numéro de table</mat-label>
+      <input matInput placeholder="Numéro de table" formControlName="numeroTable">
+    </mat-form-field>
+
+
+    <mat-form-field formGroupName="serveur">
+      <mat-label>Serveur</mat-label>
+      <mat-select formControlName="id">
+        <mat-option *ngFor="let item of serveurs" [value]="item.id">{{item.nom}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+  </form>
+
+</div>
+<div matDialogActions align="end">
+  <button mat-raised-button color="primary" (click)="save(form.value)">Enregistrer</button>
+  <button mat-raised-button color="accent" matDialogClose>Annuler</button>
+</div>

@@ -1,0 +1,55 @@
+<div matDialogContent>
+
+  <div class="header">
+    <div style="font-size: 16px;font-weight: bold;">Cafe TicTok</div>
+    <div>magasin izdihar</div>
+    <div>Marrakech</div>
+    <div>Tél: 06.23.65.32.11</div>
+
+    <hr style="width: 50%;">
+
+    <div style="font-size: 16px;font-weight: bold;">Sur place</div>
+    <div style="font-size: 16px;font-weight: bold;">Ticket N° {{data.id}}</div>
+  </div>
+  <div class="body">
+    <div>{{data.date | date:'dd/MM/yyyy'}} {{data.heure}}</div>
+    <div>Caissier: {{data.table?.serveur?.nom}}</div>
+    <hr style="width: 100%;">
+
+    <div style="display: flex;flex-direction: row;width: 100%;padding: 0 8px;font-weight: bolder;">
+      <div style="flex-grow: 2;">Produit</div>
+      <div style="flex-grow: 1;text-align: center;width: 40px !important;">PU</div>
+      <div style="flex-grow: 1;text-align: center;width: 40px !important;">Qté</div>
+      <div style="flex-grow: 1;text-align: center;width: 40px !important;">PT</div>
+    </div>
+
+    <hr style="width: 100%;">
+
+    <div style="display: flex;flex-direction: row;width: 100%;padding: 0 8px;font-weight: bold;" *ngFor="let item of data.lignes">
+      <div style="flex-grow: 2;">{{item.consommation?.libelle}}</div>
+      <div style="flex-grow: 1;text-align: center;width: 40px !important;">{{item.consommation?.prixUnitaire}}</div>
+      <div style="flex-grow: 1;text-align: center;width: 40px !important;">{{item.quantite}}</div>
+      <div style="flex-grow: 1;text-align: center;width: 40px !important;">{{item.montantLigne}}</div>
+    </div>
+
+    <hr style="width: 100%;">
+
+
+    <div style="display: flex;flex-direction: row;margin-bottom: 12px;font-size: 15px;"><div style="flex-grow: 1;">Nombre de produits</div> <div style="flex-grow: 1;text-align: center;">{{data.lignes?.length}}</div> </div>
+
+    <div style="font-size: 18px;font-weight: bold;display: flex;flex-direction: row;justify-content: space-evenly;">
+      <div>Total:</div>
+      <div> {{data.montantTotal}} DH</div>
+    </div>
+    <div style="font-size: 16px;display: flex;flex-direction: row;justify-content: space-evenly;margin-top: 12px;">
+      <div>Espèces</div>
+      <div> {{data.montantTotal}} DH</div>
+    </div>
+
+
+    <hr style="width: 100%;">
+
+    <div style="text-align: center;font-weight: bold;">Merci de votre visite</div>
+  </div>
+
+</div>

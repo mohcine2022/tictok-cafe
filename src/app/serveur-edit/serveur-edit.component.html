@@ -1,0 +1,19 @@
+<div matDialogTitle>
+  Ajout d'un serveur
+</div>
+<div>
+
+  <form [formGroup]="form">
+
+    <mat-form-field>
+      <mat-label>Nom du serveur</mat-label>
+      <input matInput placeholder="Nom du serveur" formControlName="nom">
+    </mat-form-field>
+
+  </form>
+
+</div>
+<div matDialogActions align="end">
+  <button mat-raised-button color="primary" (click)="save(form.value)">Enregistrer</button>
+  <button mat-raised-button color="accent" matDialogClose>Annuler</button>
+</div>
